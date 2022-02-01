@@ -1,4 +1,5 @@
 from ex2 import fetcher
+import time
 
 CALL_COUNT = 10
 
@@ -12,7 +13,19 @@ def benchmark(num):
     """
     def wrapper(func):
         # put your code here
-        pass
+        def return_func(*args, **kwargs):
+            totalTime = 0
+
+            for n in range(num):
+                startTime = time.time()
+                func(*args, **kwargs)
+                endTime = time.time()
+                totalTime += endTime - startTime
+                print(endTime - startTime)
+
+            print(totalTime / num)
+        return return_func 
+
     return wrapper
 
 
